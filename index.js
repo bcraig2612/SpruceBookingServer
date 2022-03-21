@@ -1,11 +1,15 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const db = require("./config/db");
-const PORT = 3001;
+const { urlencoded } = require("body-parser");
 
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+const PORT = 3001;
 
 // Connect
 db.connect((err) => {
