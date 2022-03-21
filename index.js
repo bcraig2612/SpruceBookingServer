@@ -1,17 +1,10 @@
 const express = require("express");
+const db = require("./config/db");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
-const mysql = require("mysql");
 const { urlencoded } = require("body-parser");
 const PORT = 3001;
-// Create connection
-const db = mysql.createConnection({
-  host: "remotemysql.com",
-  user: "aFcAXZ9CCM",
-  password: "Tpe2cPUHk0",
-  database: "aFcAXZ9CCM",
-});
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
