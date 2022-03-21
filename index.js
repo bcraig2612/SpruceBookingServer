@@ -1,17 +1,17 @@
 const express = require("express");
 const db = require("./config/db");
-const bodyParser = require("body-parser");
-const cors = require("cors");
 const app = express();
-const { urlencoded } = require("body-parser");
 const PORT = 3001;
+// const bodyParser = require("body-parser");
+// const cors = require("cors");
+// const { urlencoded } = require("body-parser");
 
-app.use(cors());
+// app.use(cors());
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   next();
 });
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Connect
