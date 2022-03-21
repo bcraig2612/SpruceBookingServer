@@ -1,12 +1,12 @@
 const express = require("express");
-// const bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const db = require("./config/db");
-// const { urlencoded } = require("body-parser");
+const { urlencoded } = require("body-parser");
 
-app.use(cors({origin:"https://spruce-booking.herokuapp.com"}));
-// app.use(express.urlencoded({ extended: true }));
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 const PORT = 3001;
