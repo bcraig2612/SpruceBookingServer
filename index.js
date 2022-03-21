@@ -51,6 +51,6 @@ app.post("/api/createBooking", (req, res) => {
   );
 });
 
-app.listen(3001, () => {
-  console.log("Server is up and running on port 3001");
+app.listen(process.env.PORT || PORT, () => {
+  console.log(`Server is up and running on port ${PORT}`);
 });
