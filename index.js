@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 });
 
 var corsOptions = {
-    origin: ['http://localhost:3000', 'https://spruce-booking.netlify.app/'],
+    origin: ['http://localhost:3000', 'https://spruce-booking.netlify.app'],
     credentials: false,
 };
 
