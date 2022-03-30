@@ -5,6 +5,16 @@ const app = express();
 const db = require("./config/db");
 const { urlencoded } = require("body-parser");
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
+});
+
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -20,11 +30,12 @@ db.connect((err) => {
 });
 
 app.get("/api/getBookings", (req, res) => {
-  const sqlSelect = "SELECT name, email_address, street_address, city, state, zip_code, booking_type, DATE_FORMAT(booking_date, '%M %e, %Y') booking_date, TIME_FORMAT(booking_time, '%h:%i %p') booking_time FROM bookings ORDER BY DATE_FORMAT(booking_date, '%Y-%m-%d') ASC";
+  const sqlSelect =
+    "SELECT name, email_address, street_address, city, state, zip_code, booking_type, DATE_FORMAT(booking_date, '%M %e, %Y') booking_date, TIME_FORMAT(booking_time, '%h:%i %p') booking_time FROM bookings ORDER BY DATE_FORMAT(booking_date, '%Y-%m-%d') ASC";
   db.query(sqlSelect, (err, result) => {
     res.send(result);
-  })
-})
+  });
+});
 
 app.post("/api/createBooking", (req, res) => {
   const customerName = req.body.customerName;
@@ -38,9 +49,21 @@ app.post("/api/createBooking", (req, res) => {
   const bookingTime = req.body.bookingTime;
   const sqlInsert =
     "INSERT INTO bookings (name, email_address, street_address, city, state, zip_code, booking_type, booking_date, booking_time) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-  db.query(sqlInsert,[customerName, emailAddress, streetAddress, city, state, zipCode, bookingType, bookingDate, bookingTime ],
+  db.query(
+    sqlInsert,
+    [
+      customerName,
+      emailAddress,
+      streetAddress,
+      city,
+      state,
+      zipCode,
+      bookingType,
+      bookingDate,
+      bookingTime,
+    ],
     (err, result) => {
-        res.send(result);
+      res.send(result);
     }
   );
 });
