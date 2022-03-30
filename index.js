@@ -15,7 +15,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors());
+var corsOptions = {
+    origin: ['http://localhost:3000', 'https://spruce-booking.netlify.app/'],
+    credentials: false,
+};
+
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
